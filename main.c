@@ -6,51 +6,48 @@
 #include <string.h>
 #include "linkedlist.h"
 
-int main(){
+// Função callback para exibir os dados de cada nó.
+void printNode(Node* node) {
+    printf("Node index: %d, Data: %s\n", node->index, node->element.text);
+}
+
+bool containsText(const Node* node){
+    return strstr(node->element.text, "data") != NULL;
+}
+
+int main() {
     // Criação da lista
     LinkedList* list = builder();
-    if (list == NULL) {
-        printf("Erro ao criar a lista.\n");
-        return 1;
+    addNodeAtFirst(list, buildNode("data 3"));
+    addNodeAtLast(list, buildNode("data 1"));
+    addNodeAtLast(list, buildNode("data 2"));
+    addNodeAtLast(list, buildNode("extra data 4"));
+
+    // Testando forEachNode
+    printf("Original List:\n");
+    forEachNode(list, printNode);
+
+    // Testando findNodesWithCondition
+    LinkedList* filteredList = findNodesWithCondition(list, containsText);
+    if (filteredList != NULL) {
+        printf("\nFiltered List (contains 'data'):\n");
+        forEachNode(filteredList, printNode);
     }
 
-    // Adicionando nós à lista
-    addNodeAtFirst(list, buildNode("Inicio"));
-    addNodeAtLast(list, buildNode("Fim"));
-    addNodeAfter(list, getFirst(list), buildNode("Meio"));
+    // Testando sortAscending e sortDescending
+    printf("\nList Sorted Ascending:\n");
+    sortAscending(list);
+    forEachNode(list, printNode);
 
-    // Exibindo os elementos da lista
-    Node* current = getFirst(list);
-    while (current != list->tail) { // Percorre até a sentinela de cauda
-        printf("Nó: %d, %s\n", current->index ,current->element.text);
-        current = current->next;
-    }
+    printf("\nList Sorted Descending:\n");
+    sortDescending(list);
+    forEachNode(list, printNode);
 
-    // Buscando um nó por dados
-    String searchString = {"Meio", 4}; // A estrutura String deve ser definida de acordo
-    Node* found = searchByData(list, searchString);
-    if (found != NULL) {
-        printf("Nó encontrado com dados: %s\n", found->element.text);
-    } else {
-        printf("Nó com dados '%s' não encontrado.\n", searchString.text);
-    }
-
-    // Buscando um nó por índice
-    int searchIndex = 1; // Assume que o índice é atualizado corretamente ao adicionar nós
-    found = searchByIndex(list, searchIndex);
-    if (found != NULL) {
-        printf("Nó encontrado com índice %d: %s\n", searchIndex, found->element.text);
-    } else {
-        printf("Nó com índice %d não encontrado.\n", searchIndex);
-    }
-
-    // Removendo elementos
-    removeAtFirst(list);
-    removeAtFirst(list); // Deve remover "Meio" agora que "Inicio" já foi removido
-    printf("Após remoções, primeiro elemento: %s\n", getFirst(list)->element.text);
-
-    // Limpando a lista
+    // Limpando recursos
     clearLinkedList(list);
+    clearLinkedList(filteredList);
+    free(list);
+    free(filteredList);
 
     return 0;
 }

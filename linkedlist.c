@@ -5,8 +5,9 @@
 #include "linkedlist.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
-Node* buildNode(char* string){
+Node* buildNode(const char* string){
     Node* node = (Node*) malloc(sizeof(Node));
 
     node->element.text = strdup(string);
@@ -107,7 +108,7 @@ void RemoveAtLast(LinkedList* linkedList){
     removeNode(linkedList, linkedList->tail->prev);
 }
 
-Node* searchByData(LinkedList* linkedlist, String string){
+Node* searchByData(const LinkedList* linkedlist, String string){
     Node* pointer = linkedlist->header->next;
     while(strcmp(pointer->element.text, string.text) != 0
             && pointer->next->next != NULL){
@@ -116,21 +117,21 @@ Node* searchByData(LinkedList* linkedlist, String string){
     return strcmp(pointer->element.text, string.text) == 0 ? pointer : NULL;
 }
 
-Node* searchByIndex(LinkedList* linkedlist, int index){
+Node* searchByIndex(const LinkedList* linkedlist, int index){
     Node* pointer = linkedlist->header->next;
     while(pointer->index != index
-            &&pointer->next->next != NULL){
+        && pointer->next->next != NULL){
         pointer = pointer->next;
     }
     return pointer->index == index ? pointer : NULL;
 }
 
-Node* getFirst(LinkedList* linkedList){
-    return linkedList->header->next;
+Node* getFirst(const LinkedList* linkedList){
+    return linkedList->size == 0 ? linkedList->header->next : linkedList->header;
 }
 
-Node* getLast(LinkedList* linkedList){
-    return linkedList->tail->prev;
+Node* getLast(const LinkedList* linkedList){
+    return linkedList->size == 0 ? linkedList->tail->prev : linkedList->tail;
 }
 
 void clearLinkedList(LinkedList* linkedList){
@@ -138,5 +139,58 @@ void clearLinkedList(LinkedList* linkedList){
     Delete(linkedList->header);
     Delete(linkedList->tail);
     free(linkedList);
+}
+
+void forEachNode(const LinkedList* linkedList, void (*func)(Node*)){
+    if(linkedList == NULL) return;
+    Node* pointer = linkedList->header->next;
+    while(pointer != linkedList->tail){
+        func(pointer);
+        pointer = pointer->next;
+    }
+}
+
+LinkedList* findNodesWithCondition(const LinkedList* linkedList, bool (*condition)(const Node*)){
+    Node* pointer = linkedList->header->next;
+
+    LinkedList* newOne = builder();
+
+    while(pointer->next->next != NULL){
+        if(condition(pointer)) addNodeAfter(newOne, getFirst(newOne), pointer);
+        pointer = pointer->next;
+    }
+
+    return newOne;
+}
+
+void sortLinkedList(LinkedList* linkedList, int (*comparator)(const Node*, const Node*)){
+    Node* pivot;
+    Node* ins;
+    Node* pointer = getFirst(linkedList);
+    while(pointer != getLast(linkedList)){
+        pivot = pointer->next;
+        removeNode(linkedList, pivot);
+        ins = pointer;
+        while(ins->prev->prev != NULL && comparator(ins, pivot) > 0){
+            ins = ins->prev;
+        }
+        addNodeAfter(linkedList, ins, pivot);
+        if(ins == pointer) pointer = pointer->next;
+    }
+}
+
+int ascending(const Node* node1, const Node* node2){
+    return strcmp(node1->element.text,node2->element.text);
+}
+int descending(const Node* node1, const Node* node2){
+    return (-1) * ascending(node1, node2);
+}
+
+void sortAscending(LinkedList* linkedList){
+    sortLinkedList(linkedList, ascending);
+}
+
+void sortDescending(LinkedList* linkedList){
+    sortLinkedList(linkedList, descending);
 }
 
