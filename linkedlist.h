@@ -31,17 +31,12 @@ typedef struct{
 
     Node* tail;//Sentinela tail
 
-    Node* pointer;
-
     int size;
 }LinkedList;
 
 LinkedList* builder();//Retorna uma LinkedList
 
-bool advance(Node* pointer);//Faz o ponteiro avançar, retorna true se ele avançou, retorna false se ja estiver no ultimo elemento, anterior ao sentinela
-bool goBack(Node* pointer);//Faz o ponteiro voltar, retorna true se ele retornou, retorna false se ja estiver no primeiro elemento, depois do sentinela
-void targetByData(LinkedList* linkedList, String string);//Mira o pointer no elemento com determinado dado
-void targetByIndex(LinkedList* linkedList, int index);//Mira o Pointer no elemento com determinado index
+Node* buildNode(char* string);//Recebe um array de char e retorna um Node
 
 void removeNode(LinkedList* linkedList, Node* node);//Só precisa saber o Node que será apagado, ja que ele irá saber sua propria posição
 void addNodeAfter(LinkedList* linkedList, Node* fromlist, Node* newNode);//Adicionar em uma posição especifica da lista

@@ -8,7 +8,6 @@
 
 Node* buildNode(char* string){
     Node* node = (Node*) malloc(sizeof(Node));
-    if(!node){return NULL;}
 
     node->element.text = strdup(string);
     node->element.length = strlen(string);
@@ -21,14 +20,12 @@ Node* buildNode(char* string){
 
 void DeleteString(String* string){
     if(string->text != NULL) free(string-> text);
+    string->text = NULL;
 }
 
 void Delete(Node* node){
     node->next = NULL;
     node->prev = NULL;
-
-    free(node->next);
-    free(node->prev);
 
     DeleteString(&node->element);
 
@@ -36,7 +33,7 @@ void Delete(Node* node){
 }
 
 void refreshIndex(Node* node, int operator){
-    while(node->next->next != NULL){
+    while(node->next != NULL){
         node->index += operator;
         node = node->next;
     }
@@ -46,16 +43,16 @@ LinkedList* builder(){
     LinkedList* linkedList =(LinkedList*) malloc(sizeof(LinkedList));
 
     linkedList->header = buildNode("__HEADER__");
+
+
     linkedList->tail = buildNode("__TAIL__");
 
-    linkedList->pointer = buildNode("__POINTER__");
+
 
     linkedList->tail->prev = linkedList->header;
     linkedList->header->next = linkedList->tail;
 
-
     linkedList->size = 0;
-
 
     return linkedList;
 }
@@ -73,17 +70,17 @@ void addNodeAfter(LinkedList* linkedList, Node* fromList, Node* newNode){
     fromList->next = newNode;
     nodeNext->prev = newNode;
 
-    newNode->index = nodeNext->index;
+    if(fromList == linkedList->header) newNode->index = 0;
+    else newNode->index = fromList->index + 1;
 
-    refreshIndex(nodeNext, 1);
+    if(linkedList->size != 0) refreshIndex(newNode->next, 1);
 
     linkedList->size++;
-
-    Delete(nodeNext);
 }
 
 void removeNode(LinkedList* linkedList, Node* node){
-    if( node == linkedList->header || linkedList->tail == node) return;
+    if( node == linkedList->header || linkedList->tail == node || node == NULL
+        || linkedList->size == 0 ) return;
 
     Node* prev = node->prev;
     Node* next = node->next;
@@ -91,13 +88,9 @@ void removeNode(LinkedList* linkedList, Node* node){
     prev->next = next;
     next->prev = prev;
 
-    if(linkedList->pointer == node) linkedList->pointer = NULL;
-
     refreshIndex(node, -1);
 
     Delete(node);
-    Delete(next);
-    Delete(prev);
 
     linkedList->size--;
 }
@@ -115,17 +108,21 @@ void RemoveAtLast(LinkedList* linkedList){
 }
 
 Node* searchByData(LinkedList* linkedlist, String string){
-    linkedlist->pointer = linkedlist->header->next;
-    while(strcmp(linkedlist->pointer->element.text, string.text) != 0){
-        if(!advance(linkedlist->pointer)) break;
+    Node* pointer = linkedlist->header->next;
+    while(strcmp(pointer->element.text, string.text) != 0
+            && pointer->next->next != NULL){
+        pointer = pointer->next;
     }
-    return linkedlist->pointer;
+    return strcmp(pointer->element.text, string.text) == 0 ? pointer : NULL;
 }
 
 Node* searchByIndex(LinkedList* linkedlist, int index){
-    linkedlist->pointer = linkedlist->header->next;
-    while(linkedlist->pointer->index != index) if(!advance(linkedlist->pointer)) break;
-    return linkedlist->pointer;
+    Node* pointer = linkedlist->header->next;
+    while(pointer->index != index
+            &&pointer->next->next != NULL){
+        pointer = pointer->next;
+    }
+    return pointer->index == index ? pointer : NULL;
 }
 
 Node* getFirst(LinkedList* linkedList){
@@ -136,29 +133,10 @@ Node* getLast(LinkedList* linkedList){
     return linkedList->tail->prev;
 }
 
-bool advance(Node* pointer){
-    if(pointer->next->next == NULL) return false;
-    else *pointer = *pointer->next; return true;
-}
-
-bool goBack(Node* pointer){
-    if(pointer->prev->prev == NULL) return false;
-    else *pointer = *pointer->prev; return true;
-}
-
-void targetByData(LinkedList* linkedList, String string){
-    linkedList->pointer = searchByData(linkedList, string);
-}
-
-void targetByIndex(LinkedList* linkedList, int index){
-    linkedList->pointer = searchByIndex(linkedList, index);
-}
-
 void clearLinkedList(LinkedList* linkedList){
     while(linkedList->size > 0) removeAtFirst(linkedList);
     Delete(linkedList->header);
     Delete(linkedList->tail);
-    Delete(linkedList->pointer);
     free(linkedList);
 }
 
