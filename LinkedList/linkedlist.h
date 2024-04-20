@@ -41,6 +41,7 @@ Node* buildNode(const char* string);//Recebe um array de char e retorna um Node
 void removeNode(LinkedList* linkedList, Node* node);//Só precisa saber o Node que será apagado, ja que ele irá saber sua propria posição
 void addNodeAfter(LinkedList* linkedList, Node* fromlist, Node* newNode);//Adicionar em uma posição especifica da lista
 
+void printNode(Node* node);
 void addNodeAtFirst(LinkedList* linkedlist,Node* node);//Necessita saber a lista onde vai ser adicionado o dado por primeiro
 void addNodeAtLast(LinkedList* linkedlist,Node* node);//Necessita saber a lista onde vai ser adicionado o dado por ultimo
 void removeAtFirst(LinkedList* linkedList);//Remove o primeito elemento de uma lista

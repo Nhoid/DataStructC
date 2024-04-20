@@ -7,6 +7,10 @@
 #include <string.h>
 #include <stdio.h>
 
+void printNode(Node* node) {
+    printf("Node index: %d, Data: %s\n", node->index, node->element.text);
+}
+
 Node* buildNode(const char* string){
     Node* node = (Node*) malloc(sizeof(Node));
 
@@ -61,12 +65,20 @@ LinkedList* builder(){
 
 void addNodeAfter(LinkedList* linkedList, Node* fromList, Node* newNode){
 
+
+    //DEBUG
+//    printf("fromList == linkedList->tail: %s\n", fromList == linkedList->tail ? "true" : "false");
+//    printf("newNode == linkedList->tail: %s\n", newNode == linkedList->tail ? "true" : "false");
+//    printf("newNode == linkedList->header: %s\n", newNode == linkedList->header ? "true" : "false");
+
+
     if(fromList == linkedList->tail || newNode == linkedList->tail || newNode == linkedList->header) return;
 
     Node* nodeNext = fromList->next;
 
     newNode->next = nodeNext;
     newNode->prev = fromList;
+
 
     fromList->next = newNode;
     nodeNext->prev = newNode;
@@ -127,11 +139,11 @@ Node* searchByIndex(const LinkedList* linkedlist, int index){
 }
 
 Node* getFirst(const LinkedList* linkedList){
-    return linkedList->size == 0 ? linkedList->header->next : linkedList->header;
+    return linkedList->size != 0 ? linkedList->header->next : linkedList->header;
 }
 
 Node* getLast(const LinkedList* linkedList){
-    return linkedList->size == 0 ? linkedList->tail->prev : linkedList->tail;
+    return linkedList->size != 0 ? linkedList->tail->prev : linkedList->tail;
 }
 
 void clearLinkedList(LinkedList* linkedList){
@@ -156,7 +168,9 @@ LinkedList* findNodesWithCondition(const LinkedList* linkedList, bool (*conditio
     LinkedList* newOne = builder();
 
     while(pointer->next->next != NULL){
-        if(condition(pointer)) addNodeAfter(newOne, getFirst(newOne), pointer);
+        if(condition(pointer)){
+           addNodeAfter(newOne, getFirst(newOne), pointer);
+        }
         pointer = pointer->next;
     }
 

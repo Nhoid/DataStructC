@@ -6,11 +6,6 @@
 #include <string.h>
 #include "linkedlist.h"
 
-// Função callback para exibir os dados de cada nó.
-void printNode(Node* node) {
-    printf("Node index: %d, Data: %s\n", node->index, node->element.text);
-}
-
 bool containsText(const Node* node){
     return strstr(node->element.text, "data") != NULL;
 }
@@ -28,26 +23,22 @@ int main() {
     forEachNode(list, printNode);
 
     // Testando findNodesWithCondition
+    printf("\nFiltered List (contains 'data'):\n");
     LinkedList* filteredList = findNodesWithCondition(list, containsText);
-    if (filteredList != NULL) {
-        printf("\nFiltered List (contains 'data'):\n");
-        forEachNode(filteredList, printNode);
-    }
+//    forEachNode(filteredList, printNode);
 
     // Testando sortAscending e sortDescending
     printf("\nList Sorted Ascending:\n");
     sortAscending(list);
-    forEachNode(list, printNode);
+//    forEachNode(list, printNode);
 
     printf("\nList Sorted Descending:\n");
     sortDescending(list);
-    forEachNode(list, printNode);
+//    forEachNode(list, printNode);
 
     // Limpando recursos
     clearLinkedList(list);
     clearLinkedList(filteredList);
-    free(list);
-    free(filteredList);
 
     return 0;
 }
