@@ -47,14 +47,13 @@ void addNodeAtLast(LinkedList* linkedlist,Node* node);//Necessita saber a lista 
 void removeAtFirst(LinkedList* linkedList);//Remove o primeito elemento de uma lista
 void RemoveAtLast(LinkedList* linkedList);//remove o ultimo elemento da lista
 
-Node* searchByData(const LinkedList* linkedlist, String string);//Procurar um node pelo conteúdo
-Node* searchByIndex(const LinkedList* linkedlist, int index);//Procura um node com base no seu index
+Node* searchByData(const LinkedList* linkedlist, const char* string);//Procurar um node pelo conteúdo
+Node* searchByIndex(const LinkedList* linkedlist,const int index);//Procura um node com base no seu index
 Node* getFirst(const LinkedList* linkedlist);//Pega o primeiro elemento
 Node* getLast(const LinkedList* linkedlist);//Pega o ultimo elemento
 
 void clearLinkedList(LinkedList* linkedList);//Deleta uma lista
 
-//Funções para testar:
 void forEachNode(const LinkedList* linkedList, void (*func)(Node*));//Executa uma função para cada Elemento da lista
 LinkedList* findNodesWithCondition(const LinkedList* linkedList, bool (*condition)(const Node*));//Retorna uma Lista de elementos com determinadas caracterisiticas
 void sortLinkedList(LinkedList* linkedList, int (*comparator)(const Node*, const Node*));//Organiza a lista com determinado parametro

@@ -6,39 +6,34 @@
 #include <string.h>
 #include "linkedlist.h"
 
-bool containsText(const Node* node){
-    return strstr(node->element.text, "data") != NULL;
+bool containsText(const Node* node) {
+    return strstr(node->element.text, "") != NULL;  // Exemplo: procura por "data" no texto.
 }
 
 int main() {
     // Criação da lista
     LinkedList* list = builder();
-    addNodeAtFirst(list, buildNode("data 3"));
-    addNodeAtLast(list, buildNode("data 1"));
-    addNodeAtLast(list, buildNode("data 2"));
-    addNodeAtLast(list, buildNode("extra data 4"));
 
-    // Testando forEachNode
-    printf("Original List:\n");
-    forEachNode(list, printNode);
+    addNodeAtFirst(list, buildNode("Gabriela"));
+    addNodeAtFirst(list, buildNode("Geraldo"));
+    addNodeAtLast(list, buildNode("Marcos"));
+    addNodeAtLast(list, buildNode("Maria"));
 
-    // Testando findNodesWithCondition
-    printf("\nFiltered List (contains 'data'):\n");
-    LinkedList* filteredList = findNodesWithCondition(list, containsText);
-//    forEachNode(filteredList, printNode);
+    LinkedList* newOne = findNodesWithCondition(list, containsText);
+    printf("Original: \n");
+    forEachNode(newOne, printNode);
 
-    // Testando sortAscending e sortDescending
-    printf("\nList Sorted Ascending:\n");
-    sortAscending(list);
-//    forEachNode(list, printNode);
+    sortAscending(newOne);
+    printf("Order: \n");
+    forEachNode(newOne, printNode);
 
-    printf("\nList Sorted Descending:\n");
-    sortDescending(list);
-//    forEachNode(list, printNode);
+    sortDescending(newOne);
+    printf("Reverse: \n");
+    forEachNode(newOne, printNode);
 
     // Limpando recursos
     clearLinkedList(list);
-    clearLinkedList(filteredList);
+    clearLinkedList(newOne);
 
     return 0;
 }
