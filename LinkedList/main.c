@@ -2,7 +2,6 @@
 // Created by dinho on 18/04/24.
 //
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "linkedlist.h"
 
