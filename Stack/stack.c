@@ -85,8 +85,13 @@ void Delete(Node* node){
 
 //Remove e retorna o primeiro elemento da stack
 Node pop(Stack* stack){
-    //Faz uma copia do primeiro elemento da stack
+
     Node node;
+
+    if(isEmpty(stack)) return node;
+
+    //Faz uma copia do primeiro elemento da stack
+
     node.element.text = strdup( top(stack)->element.text );
     node.element.length = top(stack)->element.length;
 
@@ -99,6 +104,7 @@ Node pop(Stack* stack){
     return node;
 }
 
+//Deleta uma Stack
 void deleteStack(Stack* stack){
     //Apaga todos elementos da stack, caso tenha
     while(!isEmpty(stack)){
@@ -106,6 +112,21 @@ void deleteStack(Stack* stack){
     }
 
     free(stack);
+}
 
+//Inverte um Array de String
+void reverseArray(String* array, int size){
+    Stack* stack = builder();
+
+    for (int i = 0; i < size; i++) {
+        Node* node = buildNode(array[i].text);
+        push(stack, node);
+    }
+
+    for (int i = 0; i < size; i++) {
+        array[i] = pop(stack).element;
+    }
+
+    deleteStack(stack);
 }
 

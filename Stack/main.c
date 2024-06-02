@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "stack.h"
 
 int main() {
@@ -40,6 +41,28 @@ int main() {
 
     // Verificando novamente se a pilha está vazia
     printf("\nA pilha está vazia? %s\n", isEmpty(stack) ? "Sim" : "Não");
+
+    // Teste da função reverseArray
+    String array[] = {
+            {"primeiro", strlen("primeiro")},
+            {"segundo", strlen("segundo")},
+            {"terceiro", strlen("terceiro")}
+    };
+    int arraySize = sizeof(array) / sizeof(array[0]);
+
+    printf("\nTestando Função de inverter Array:\n");
+
+    printf("\nArray original:\n");
+    for (int i = 0; i < arraySize; i++) {
+        printf("%s\n", array[i].text);
+    }
+
+    reverseArray(array, arraySize);
+
+    printf("\nArray invertido:\n");
+    for (int i = 0; i < arraySize; i++) {
+        printf("%s\n", array[i].text);
+    }
 
     // Liberando a memória alocada para a pilha
     deleteStack(stack);

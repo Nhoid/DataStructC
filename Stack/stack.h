@@ -39,6 +39,8 @@ bool isEmpty(const Stack* stack);//Verifica se a Stack está vazia
 
 Node* top(const Stack* stack);//Retorna o primeiro elemento da stack
 
+void reverseArray(String* array, int size);//Inverte um array
+
 void push(Stack* stack, Node* node);//Insere um novo elemento no topo da stack
 
 Node pop(Stack* stack);//Remove e retorna o primeiro item da stack
