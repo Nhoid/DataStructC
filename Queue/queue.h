@@ -2,8 +2,8 @@
 // Created by Dinho on 5/31/2024.
 //
 
-#ifndef GIT_QUEUE_H
-#define GIT_QUEUE_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include <stdbool.h>
 
@@ -37,6 +37,7 @@ typedef struct{
 Queue* builder(); //retorna uma nova queue
 
 Node* buildNode(const char* string);//retorna um novo node
+void Delete(Node* node);//Apaga um Node da memoria
 
 void enqueue(Queue* queue ,Node* node);// adiciona o elemento no fim da queue
 
@@ -50,4 +51,4 @@ Node* front(const Queue* queue);//retorna, mas não remove, o primeiro elemento
 
 void deleteQueue(Queue* queue);//libera a memoria da queue por completo
 
-#endif //GIT_QUEUE_H
+#endif //QUEUE_H

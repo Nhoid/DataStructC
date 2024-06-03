@@ -32,6 +32,7 @@ typedef struct{
 Stack* builder();//Cria uma Stack nova
 
 Node* buildNode(const char* string);//Cria um novo node a partir de um array de char
+void Delete(Node* node);//Apaga um Node da memoria
 
 int size(const Stack* stack);// Retorna o tamanho da Stack
 

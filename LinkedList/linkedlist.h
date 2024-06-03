@@ -37,6 +37,7 @@ typedef struct{
 LinkedList* builder();//Retorna uma LinkedList
 
 Node* buildNode(const char* string);//Recebe um array de char e retorna um Node
+void Delete(Node* node);//Apaga um Node da memoria
 
 void removeNode(LinkedList* linkedList, Node* node);//Só precisa saber o Node que será apagado, ja que ele irá saber sua propria posição
 void addNodeAfter(LinkedList* linkedList, Node* fromlist, Node* newNode);//Adicionar em uma posição especifica da lista

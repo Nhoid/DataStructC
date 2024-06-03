@@ -162,7 +162,7 @@ void removeNodeWithOutDelete(LinkedList* linkedList, Node* node){
 
 //ADICIONA UM NODE NA PRIMEIRA POSIÇÃO DA LISTA USANDO O HEADER COMO REFERÊNCIA
 void addNodeAtFirst(LinkedList* linkedlist, Node* node){
-    addNodeAfter(linkedlist, getFirst(linkedlist), node);
+    addNodeAfter(linkedlist, linkedList->header, node);
 }
 //ADICIONA O ELEMENTO NA ULTIMA POSIÇÃO DA LISTA USANDO O ANTERIOR A TAIL COMO REFERÊNCIA
 void addNodeAtLast(LinkedList* linkedlist,Node* node){
