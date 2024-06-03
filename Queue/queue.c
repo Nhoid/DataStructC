@@ -83,9 +83,9 @@ void enqueue(Queue* queue, Node* node){
     queue->size++;
 }
 
-//Retorna, mas não apaga, o primeiro elemento
+//Retorna, mas não apaga, o primeiro elemento 
 Node* front(const Queue* queue){
-    return queue->first;
+    return queue->first;;
 }
 
 //Remove e retorna o primeiro elemento
