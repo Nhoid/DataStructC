@@ -73,11 +73,10 @@ void enqueue(Queue* queue, Node* node){
     //Verifica se tem algum elemento
     if(isEmpty(queue)){
         //Se não tiver ele atribui o primeiro e ultimo
-        queue->first = node;
-        queue->last = node;
+        queue->first = queue->last = node;
     }else{
         //se tiver, ele o elemento para o fim de fila
-        node->next = queue->last;
+        queue->last->next = node;
         queue->last = node;
     }
     //aumenta o tamanho da fila
@@ -94,12 +93,17 @@ Node* dequeue(Queue* queue){
 
     if(isEmpty(queue)) return NULL;
 
-    //Pega o primeiro
-    Node* node = front(queue);
+    //Pega referencia do primeiro
+    Node* toDelete = queue->first;
+   
+   //Pega uma copia dos dados do primeiro
+    Node* node = buildNode(toDelete->element.text);
 
     //Pega a referencia do segundo
     queue->first = queue->first->next;
 
+    //Apaga da memoria
+    Delete(toDelete);
 
     //diminui o tamanho da fila
     queue->size--;

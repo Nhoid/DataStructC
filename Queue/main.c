@@ -1,10 +1,9 @@
-//
-// Created by Dinho on 5/31/2024.
-//
-#include <stdio.h>
+
+#include  <stdio.h>
 #include "queue.h"
 
-// Função main para testar as funcionalidades
+
+
 int main() {
     // Cria uma nova fila
     Queue* queue = builder();
@@ -30,9 +29,11 @@ int main() {
     Node* frontNode = front(queue);
     printf("Elemento na frente da fila: %s\n", frontNode->element.text);
 
-    // Remove e retorna elementos da fila
-    printf("Elemento removido: %s\n", dequeue(queue)->element.text);
-    printf("Elemento removido: %s\n", dequeue(queue)->element.text);
+    while(queue->size > 0){
+    	// Remove e retorna elementos da fila
+	    Node* dequeuedNode = dequeue(queue);
+	    printf("Elemento removido: %s\n", dequeuedNode->element.text);
+    }
 
     // Verifica o tamanho da fila após remover elementos
     printf("Tamanho da fila: %d\n", size(queue));
