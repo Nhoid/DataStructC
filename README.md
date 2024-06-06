@@ -4,6 +4,8 @@ Este repositório foi criado para fins de aprendizado, com base no livro *Estrut
 
 Cada estrutura de dados está organizada em pastas individuais com seu respectivo nome e contém arquivos `.h`, `.c` e um `main.c` com testes básicos das funcionalidades implementadas. Além disso, cada pasta possui um `Makefile` para facilitar a compilação.
 
+*Obs: Todos estão sendo feitos para guardar uma String. As funções de manipulação de String irei fazer, futuramente, em outro repositório, quando estiver pronto eu coloco o link aqui. Por enquanto estou fazendo apenas as estruturas de dados.*
+
 ## Estruturas Implementadas
 
 - [x] LinkedList (Lista Ligada)
