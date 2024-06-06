@@ -2,6 +2,8 @@
 
 Este repositório contém a implementação de uma lista ligada (LinkedList) em linguagem C. A lista ligada é uma estrutura de dados dinâmica que permite a inserção, remoção e manipulação de elementos de forma eficiente.
 
+Esta é a estrutura de dados à qual adicionei mais funções, pois é a que melhor se adequa a certos tipos de operações. Aproveitei também para testar alguns dos meus conhecimentos, incluindo funções de ordem superior.
+
 ## Estruturas de Dados
 
 ### String
