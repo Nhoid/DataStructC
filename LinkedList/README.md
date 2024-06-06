@@ -39,6 +39,7 @@ Estrutura para representar a lista ligada.
 
 ### Funções Disponíveis
 
+-------------------
 
 - `LinkedList* builder();`
     - Retorna uma nova instância de `LinkedList`.
