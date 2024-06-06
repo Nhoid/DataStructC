@@ -36,9 +36,7 @@ typedef struct {
 ```
 Estrutura para representar a lista ligada.
 
-
-### Funções Disponíveis
-
+Funções Disponíveis
 -------------------
 
 - `LinkedList* builder();`
