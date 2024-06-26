@@ -232,7 +232,7 @@ Node* getLast(const LinkedList* linkedList){
 }
 //LIMPA UMA LISTA DA MEMORIA
 void clearLinkedList(LinkedList* linkedList){
-    while(linkedList->size > 0) removeAtFirst(linkedList);//VAI REMOVENDO NODE POR NODE
+    while(linkedList->size > 0) removeAtLast(linkedList);//VAI REMOVENDO NODE POR NODE
     Delete(linkedList->header);//REMOVE O HEADER
     Delete(linkedList->tail);//REMOVE A TAIL
     free(linkedList);//REMOVE A LISTA
