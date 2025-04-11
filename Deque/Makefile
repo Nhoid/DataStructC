@@ -1,3 +1,3 @@
 # Compila o programa principal
-main: main.c deque.c
+main: src/main.c src/deque.c
 	gcc -g -Wall -Wextra -o main main.c deque.c

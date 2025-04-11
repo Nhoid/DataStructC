@@ -2,9 +2,14 @@
 
 Este repositório foi criado para fins de aprendizado, com base no livro *Estruturas de Dados & Algoritmos em Java* de Michael T. Goodrich e Roberto Tamassia. As implementações são feitas em C para reforçar os conceitos estudados.
 
-Cada estrutura de dados está organizada em pastas individuais com seu respectivo nome e contém arquivos `.h`, `.c` e um `main.c` com testes básicos das funcionalidades implementadas. Além disso, cada pasta possui um `Makefile` para facilitar a compilação.
+Cada estrutura de dados está organizada em pastas individuais com seu respectivo nome. Cada uma contém os seguintes diretórios e arquivos:
 
-*Obs: Todos estão sendo feitos para guardar uma String. As funções de manipulação de String irei fazer, futuramente, em outro repositório, quando estiver pronto eu coloco o link aqui. Por enquanto estou fazendo apenas as estruturas de dados.*
+- `include/` com os arquivos `.h` (headers)
+- `src/` com os arquivos `.c`, incluindo o `main.c`
+- `bin/` (inicialmente vazia), onde o executável será gerado
+- `Makefile` para facilitar a compilação
+
+> ⚠️ As primeiras estruturas (LinkedList, Queue, Deque, Stack) foram feitas na época em que eu estava começando a estudar o assunto. Pretendo refazê-las futuramente de forma genérica, como fiz com a árvore.
 
 ## Estruturas Implementadas
 
@@ -12,35 +17,46 @@ Cada estrutura de dados está organizada em pastas individuais com seu respectiv
 - [x] Queue (Fila)
 - [x] Deque (Deque)
 - [x] Stack (Pilha)
+- [x] BinaryTree (Árvore Binária Genérica)
 
 ## Estrutura do Repositório
 
 O repositório está organizado da seguinte forma:
 
 - **LinkedList/**
-  - `LinkedList.h`
-  - `LinkedList.c`
-  - `main.c`
+  - `include/linkedList.h`
+  - `src/linkedList.c`
+  - `src/main.c`
+  - `bin/` (pasta onde o executável será gerado)
   - `Makefile`
 - **Queue/**
-  - `Queue.h`
-  - `Queue.c`
-  - `main.c`
+  - `include/queue.h`
+  - `src/queue.c`
+  - `src/main.c`
+  - `bin/`
   - `Makefile`
 - **Deque/**
-  - `Deque.h`
-  - `Deque.c`
-  - `main.c`
+  - `include/deque.h`
+  - `src/deque.c`
+  - `src/main.c`
+  - `bin/`
   - `Makefile`
 - **Stack/**
-  - `Stack.h`
-  - `Stack.c`
-  - `main.c`
+  - `include/stack.h`
+  - `src/stack.c`
+  - `src/main.c`
+  - `bin/`
+  - `Makefile`
+- **Tree/**
+  - `include/tree.h`
+  - `src/tree.c`
+  - `src/main.c`
+  - `bin/`
   - `Makefile`
 
 ## Como Executar
 
-Para compilar e executar os testes básicos de cada estrutura de dados, siga as instruções abaixo. Cada estrutura possui seu próprio `Makefile` que facilita a compilação.
+Para compilar e executar os testes básicos de cada estrutura de dados, siga os passos:
 
 1. Clone este repositório:
     ```bash
@@ -57,7 +73,9 @@ Para compilar e executar os testes básicos de cada estrutura de dados, siga as 
     make
     ```
 
-4. Execute o arquivo gerado:
+4. Execute o arquivo gerado na pasta `bin`:
     ```bash
-    ./main
+    ./bin/main
     ```
+
+> Repita os passos acima para qualquer outra estrutura (como Queue, Deque, Stack, BinaryTree, etc).
